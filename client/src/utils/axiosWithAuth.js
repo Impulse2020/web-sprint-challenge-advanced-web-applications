@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function AxiosWithAut(){
+function AxiosWithAuth(){
     const token = localStorage.getItem("token");
 
     return axios.create({

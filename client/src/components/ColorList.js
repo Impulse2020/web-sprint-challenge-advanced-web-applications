@@ -5,6 +5,7 @@ const initialColor = {
   color: "",
   code: { hex: "" }
 };
+const token = localStorage.getItem("token");
 
 const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
@@ -20,11 +21,21 @@ const ColorList = ({ colors, updateColors }) => {
     e.preventDefault();
     // Make a put request to save your updated color
     // think about where will you get the id from...
-    // where is is saved right now?
+    // where is it saved right now?
+    axios.put(`http://localhost:5000/api/colors/id:${colorToEdit.id}`, colorToEdit ,{headers:{Authorization:token}})
+      .then(response =>{
+        console.log(response)
+      })
+      .catch(err =>{console.log(err)})
+    console.log(colorToEdit);
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    axios
+      .delete(`http://localhost:5000/api/colors/${color.id}`, {headers: {Authorization:token}})
+      .then(res =>{console.log(res)})
+      .catch(err =>{console.log(err)})
   };
 
   return (
